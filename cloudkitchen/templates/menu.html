@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'css/menu.css'%}" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <hr size="1px" width="99%" />
+    <div id="head">
+      <span id="cloud kitchen">
+        <a href="{%url 'index'%}"
+          ><span id="cloud">Cloud</span><span id="kitchen"> Kitchen </span></a
+        ></span
+      >
+      <span id="menu"><a href="{%url 'menu'%}">Menu</a></span>
+      <span id="corders">
+        <span id="orders">Orders</span><span id="countorders">0</span></span
+      >
+      <span id="about">About</span>
+      <input type="text" id="search" placeholder="search" />
+      <span id="signin"><a href="{%url 'login'%}">signin</a></span>
+    </div>
+    <hr size="1px" width="99%" />
+    <div id="imgbox">
+      {%for m in dishes%}
+      <center>
+        <span><img src="{{m.product_img.url}}" class="img" /></span>
+      </center>
+      {%endfor%}
+    </div>
+    <br /><span style="font-size: 30px"> Non Veg Dishes</span><br />
+    <div class="nveg">
+      {%for d in nvdishes%}
+      <div class="ndishes">
+        <center>
+          <img src="{{d.product_img.url}}" /><br />
+          <span class="pname">{{d.product_name}}</span><br />
+          <span class="pdesc">{{d.product_desc}}</span><br />
+          <span class="pprice">{{d.product_price}}</span><br />
+          <a href="" onclick="return plus(this)" class="plus">+</a>
+          <a href="" onclick="return minus()" class="minus">-</a>
+          <span class="count">0</span>
+        </center>
+      </div>
+      {%endfor%}
+    </div>
+    <br /><span style="font-size: 30px">Veg Dishes</span><br />
+    {%for d in vdishes%}
+    <div class="vdishes">
+      <center>
+        <img src="{{d.product_img.url}}" /><br />
+        <span class="pname">{{d.product_name}}</span><br />
+        <span class="pdesc">{{d.product_desc}}</span><br />
+        <span class="pprice">{{d.product_price}}</span><br />
+        <a
+          href=""
+          id="{{d.product_id}}"
+          onclick="return plus(this)"
+          class="plus"
+          >+</a
+        >
+        <a href="" onclick="return minus()" class="minus">-</a><br />
+        <span class="count">0</span>
+        <p hidden id="pid">{{d.product_id}}</p>
+      </center>
+    </div>
+
+    {% endfor %}
+    <script src="{%static 'js/script.js'%}"></script>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloud Kitchen</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'css/index.css'%}" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <hr size="1px" width="99%" />
+    <div id="head">
+      <span id="cloud kitchen"
+        ><a href="{%url 'index'%}"
+          ><span id="cloud">Cloud</span><span id="kitchen"> Kitchen </span></a
+        ></span
+      >
+      <span id="menu"><a href="{%url 'menu'%}">Menu</a></span>
+      <span id="corders"
+        ><a href="{%url 'orders'%}">
+          <span id="orders">Orders</span><span id="countorders">0</span></a
+        ></span
+      >
+      <span id="about">About</span>
+      <input type="text" id="search" placeholder="search" />
+
+      <span id="signin"><a href="{%url 'login'%}">{{s}}</a></span>
+    </div>
+    <hr size="1px" width="99%" />
+    <div class="bframe">
+      <br /><span style="font-size: 30px">Most Ordered Non Veg Dishes</span
+      ><br />
+      {%for d in nvdishes%}
+
+      <div class="ndishes">
+        <center>
+          <img src="{{d.product_img.url}}" /><br />
+          <span class="pname">{{d.product_name}}</span><br />
+          <span class="pdesc">{{d.product_desc}}</span><br />
+          <span class="pprice">{{d.product_price}}</span><br />
+          <span>{{d.product_id}}</span>
+          {%with pid='h1' %}
+          <a
+            href="{%url 'addorderindex'%}"
+            id="{{pid}}"
+            onclick=" return plus(this)"
+            class="plus"
+            >+</a
+          >
+          {%endwith%} <a href="" onclick="return minus()" class="minus">-</a
+          ><br />
+          <span class="count" id="{{d.product_id}}">0</span>
+        </center>
+      </div>
+
+      {% endfor %}
+      <br /><span style="font-size: 30px">Most Ordered Veg Dishes</span><br />
+      {%for d in vdishes%}
+      <div class="vdishes">
+        <center>
+          <img src="{{d.product_img.url}}" /><br />
+          <span class="pname">{{d.product_img}}</span><br />
+          <span class="pname">{{d.product_name}}</span><br />
+          <span class="pdesc">{{d.product_desc}}</span><br />
+          <span class="pprice">{{d.product_price}}</span><br />
+          <a href="" onclick="return plus()" class="plus">+</a>
+          <a href="" onclick="return minus()" class="minus">-</a><br />
+          <span class="count">0</span>
+        </center>
+      </div>
+
+      {% endfor %}
+    </div>
+    <script src="{%static 'js/script.js'%}"></script>
+  </body>
+</html>

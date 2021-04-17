@@ -1,0 +1,90 @@
+#cloud {
+  margin: 15px 2px 10px 20px;
+  color: #92c253;
+  font-size: 30px;
+}
+#kitchen {
+  margin: 15px 10px 10px 2px;
+  color: #b8b94a;
+  font-size: 30px;
+}
+#menu {
+  margin: 15px 10px 10px 630px;
+  color: #4881b1;
+  font-size: 30px;
+}
+#orders {
+  margin: 15px 10px 10px 20px;
+  color: #5f90bd;
+  font-size: 30px;
+}
+#about {
+  margin: 15px 10px 10px 20px;
+  color: #5f90bd;
+  font-size: 30px;
+}
+#search {
+  margin: 15px 10px 10px 20px;
+  height: 25px;
+  width: 200px;
+}
+::placeholder {
+  font-size: 20px;
+}
+#signin {
+  font-size: 25px;
+  margin-right: 10px;
+  padding: 5px 5px 8px 5px;
+  border: 1px solid;
+  border-radius: 20px;
+}
+body {
+  background-color: rgba(21, 138, 167, 0);
+}
+a {
+  text-decoration: none;
+}
+
+.ndishes {
+  width: 420px;
+  height: 400px;
+  padding: 10px 10px 0px 10px;
+  margin: 10px 10px 10px 10px;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+img {
+  width: 400px;
+  height: 200px;
+}
+
+.vdishes {
+  width: 420px;
+  height: 400px;
+  padding: 10px 10px 0px 10px;
+  margin: 10px 10px 10px 10px;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+.plus{
+  padding: 3px 8px 0px 8px;
+  margin: 5px 5px 5px 5px;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  font-size: 25px;
+}
+.minus{
+  padding: 3px 10px 0px 10px;
+  margin: 5px 5px 5px 5px;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  font-size: 25px;
+}

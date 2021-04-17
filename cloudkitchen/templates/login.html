@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    {%load static%} <link rel="stylesheet" href="{%static 'css/login.css'%}"
+  </head>
+  <body>
+    <form action="verifylogin" method="POST">
+      <center>
+        ` {% csrf_token %}
+        <div id="loginbox">
+          <span id="mail">Username </span><br />
+          <input type="text" name="uname" height="20px" width="175px" /><br />
+          <span id="pswd" name="password">Password</span><br />
+          <input
+            type="password"
+            name="password"
+            height="20px"
+            width="175px"
+          /><br />
+          <button id="login">login</button><br />
+          <span id="signup"><a href="{%url 'signup'%}">signup</a></span>
+        </div>
+      </center>
+    </form>
+  </body>
+</html>
