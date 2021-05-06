@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      #head {
+        background: inherit;
+        position: fixed;
+        z-index: 10;
+      }
+      #cloud {
+        margin: 15px 2px 10px 20px;
+        color: #92c253;
+        font-size: 30px;
+      }
+      #kitchen {
+        margin: 15px 10px 10px 20px;
+        color: #b8b94a;
+        font-size: 30px;
+      }
+      #menu {
+        margin: 15px 10px 10px 600px;
+        color: #4881b1;
+        font-size: 30px;
+      }
+      #orders {
+        margin: 15px 10px 10px 20px;
+        color: #5f90bd;
+        font-size: 30px;
+      }
+      #about {
+        margin: 15px 10px 10px 20px;
+        color: #5f90bd;
+        font-size: 30px;
+      }
+      #search {
+        margin: 15px 10px 10px 20px;
+        height: 25px;
+        width: 200px;
+      }
+
+      #headlinetop {
+        margin-top: 10px;
+      }
+
+      #headlinebottom {
+        margin-bottom: 5px;
+      }
+      ::placeholder {
+        font-size: 20px;
+      }
+
+      .img {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+      }
+      #headingorders {
+        font-size: 40px;
+      }
+      #total {
+        margin-left: 200px;
+        margin-right: 0;
+      }
+
+      .tableorders {
+        line-height: 30px;
+        display: inline-block;
+        position: relative;
+        padding: 10px 10px 10px 10px;
+        border: 1px solid black;
+      }
+      #tableitems {
+        width: 45%;
+        
+      }
+      #tableor{
+        width: 45%;
+      }
+      #udetails {
+      }
+      #paymentmethod {
+        
+        
+      }
+      #placeorder {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 4px 4px 4px 4px ;
+
+      }
+      
+      span:hover {
+        background-color: grey;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="head">
+      <hr size="1px" width="99%" id="headlinetop" />
+      <span id="cloud kitchen"
+        ><a href="{%url 'index'%}"
+          ><span id="cloud">Cloud</span><span id="kitchen"> Kitchen </span></a
+        ></span
+      >
+      <span id="menu"><a href="{%url 'menu'%}">Menu</a></span>
+      <span id="corders"
+        ><a href="{%url 'displayorders'%}">
+          <span id="orders">Orders</span><span id="countorders">0</span></a
+        ></span
+      >
+      <span id="about">About</span>
+      <input type="text" id="search" placeholder="search" />
+
+      <span id="signin"><a href="{%url 'login'%}" id="sign">signin</a></span>
+      <hr size="1px" width="99%" id="headlinebottom" />
+    </div>
+    <br /><br /><br /><br />
+    <div id="discontainer">
+      <div id="tableitems" class="tableorders">
+        <span id="headingorders">Ordered Items</span><br />
+        <table>
+          <tr>
+            <th>Sno</th>
+            <th>img</th>
+            <th>Name</th>
+            <th>No of items</th>
+            <th>Price</th>
+          </tr>
+          <center>
+            {% for i in ordereditems %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td><img src="image/{{i.order_img}}" class="img" /></td>
+              <td>{{i.order_name}}</td>
+              <td>
+                <center><span class="noofitems">{{i.numofprod}}</span></center>
+              </td>
+              <td>&#8377;<span class="price"> {{i.order_price}}</span></td>
+            </tr>
+            {%endfor%}
+          </center>
+        </table>
+        <div id="total">
+          No of items:&nbsp;<span id="billnoofitems">0</span><br />
+          Total cost:&nbsp;<span id="totalcost">0</span>
+        </div>
+      </div>
+      
+      <div class="tableorders" id="tableor">
+        <form method="POST" action="displaybill/" id="addressform">
+          <div id="udetails" class="tableorders1">
+            Name:<input type="text" name="name" id="una"/><br />
+            Address: <input type="text" name="address" /><br />
+            Phone Number: <input type="text" name="phnnum" /><br />
+            {% csrf_token %}
+          </div>
+          <div id="paymentmethod" class="tableorders1">
+            Credit:<input type="text" name="credit" /><br />
+            Debit:<input type="text" name="debit" /><br />
+            Upi:<input type="text" name="upi" /><br />
+            Netbanking:<input type="text" name="netbanking" /><br />
+            Cash on Delivery:<input
+              type="radio"
+              name="cashondelivary"
+              value="true"
+            /><br />
+          </div>
+
+          <center>
+            <div id="total">
+              No of items:&nbsp;<span id="billnoofitems1">0</span><br />
+              Total cost:&nbsp;<span id="totalcost1">0</span><br />
+            </div>
+            <span id="placeorder" onclick="submit()">place order</span>
+          </center>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      calculate();
+      function submit() {
+        var form = document.getElementById("addressform");
+
+        form.submit();
+      }
+      function calculate() {
+        var total = 0;
+        var noofitemsordered = 0;
+        p = document.getElementsByClassName("price");
+        n = document.getElementsByClassName("noofitems");
+        document.getElementById("una").value=localStorage.getItem("uname");
+        for (var i = 0; i < p.length; i++) {
+          console.log(parseInt(p[i].innerHTML));
+          total = total + parseInt(p[i].innerHTML);
+          noofitemsordered = noofitemsordered + parseInt(n[i].innerHTML);
+        }
+        console.log(total);
+        document.getElementById("totalcost").innerHTML = total;
+
+        document.getElementById("billnoofitems").innerHTML = noofitemsordered;
+        document.getElementById("totalcost1").innerHTML = total;
+
+        document.getElementById("billnoofitems1").innerHTML = noofitemsordered;
+        localStorage.setItem("total", total);
+        localStorage.setItem("noofitems", noofitemsordered);
+
+        var co = localStorage.getItem("count");
+        document.getElementById("countorders").innerHTML = co;
+        var x = document.getElementById("sign").innerHTML;
+        if (x !== "signin") {
+          // console.log("xxxxxxxxxxxxxxxxxxxxx");
+          localStorage.setItem("uname", x);
+        }
+        var unam = localStorage.getItem("uname");
+        console.log("unaaaaaaaaaammmmmme " + unam);
+        document.getElementById("sign").innerHTML = unam;
+        console.log(x + " xxxxxxxxxxxxxxxxxxxxxxx");
+      }
+    </script>
+  </body>
+</html>

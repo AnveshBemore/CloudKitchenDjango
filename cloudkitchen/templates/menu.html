@@ -14,31 +14,35 @@
     ></script>
   </head>
   <body>
-    <hr size="1px" width="99%" />
     <div id="head">
+      <hr size="1px" width="99%" id="headlinetop" />
       <span id="cloud kitchen">
         <a href="{%url 'index'%}"
           ><span id="cloud">Cloud</span><span id="kitchen"> Kitchen </span></a
         ></span
       >
       <span id="menu"><a href="{%url 'menu'%}">Menu</a></span>
-      <span id="corders">
-        <span id="orders">Orders</span><span id="countorders">0</span></span
+      <span id="corders"
+        ><a href="{%url 'minusorders'%}">
+          <span id="orders">Orders</span><span id="countorders">0</span></a
+        ></span
       >
       <span id="about">About</span>
       <input type="text" id="search" placeholder="search" />
-      <span id="signin"><a href="{%url 'login'%}">signin</a></span>
+      <span id="signin"><a href="{%url 'login'%}" id="sign">{{uname}}</a></span>
+      <hr size="1px" width="99%" id="headlinebottom" />
     </div>
-    <hr size="1px" width="99%" />
     <div id="imgbox">
       {%for m in dishes%}
       <center>
-        <span><img src="{{m.product_img.url}}" class="img" /></span>
+        <div>
+          <span><img src="{{m.product_img.url}}" class="img" /></span>
+        </div>
       </center>
       {%endfor%}
     </div>
     <br /><span style="font-size: 30px"> Non Veg Dishes</span><br />
-    <div class="nveg">
+    <div id="nveg">
       {%for d in nvdishes%}
       <div class="ndishes">
         <center>
@@ -46,8 +50,18 @@
           <span class="pname">{{d.product_name}}</span><br />
           <span class="pdesc">{{d.product_desc}}</span><br />
           <span class="pprice">{{d.product_price}}</span><br />
-          <a href="" onclick="return plus(this)" class="plus">+</a>
-          <a href="" onclick="return minus()" class="minus">-</a>
+          <a
+            href="setorders/?id={{d.product_id}}&type=menu"
+            onclick="return plus(this);"
+            class="plus"
+            >+</a
+          >
+          <a
+            href="deleteorders/?id={{d.product_id}}&type=menu"
+            onclick="return minus();"
+            class="minus"
+            >-</a
+          >
           <span class="count">0</span>
         </center>
       </div>
@@ -62,19 +76,24 @@
         <span class="pdesc">{{d.product_desc}}</span><br />
         <span class="pprice">{{d.product_price}}</span><br />
         <a
-          href=""
+          href="setorders/?id={{d.product_id}}&type=menu"
           id="{{d.product_id}}"
-          onclick="return plus(this)"
+          onclick="return plus(this);"
           class="plus"
           >+</a
         >
-        <a href="" onclick="return minus()" class="minus">-</a><br />
+        <a
+          href="deleteorders/?id={{d.product_id}}&type=index"
+          onclick="return minus();"
+          class="minus"
+          >-</a
+        ><br />
         <span class="count">0</span>
         <p hidden id="pid">{{d.product_id}}</p>
       </center>
     </div>
 
     {% endfor %}
-    <script src="{%static 'js/script.js'%}"></script>
+    <script src="{%static 'js/menu.js'%}"></script>
   </body>
 </html>

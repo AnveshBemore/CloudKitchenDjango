@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class udetails(models.Model):
     
-    uname=models.CharField(max_length=100)
+    uname=models.CharField(max_length=100,default="ck")
     password=models.CharField(max_length=100)
     phnnum=models.IntegerField(null=False,default=0)
     address=models.CharField(max_length=500,null=False,default="")
@@ -21,13 +21,25 @@ class product(models.Model):
     
     def __str__(self):
         return self.product_name
-
+ 
 class orders(models.Model):
-    order_id=models.AutoField(primary_key=True)
+    order_sno=models.AutoField(db_column='order_sno', primary_key=True)
+    order_id=models.ForeignKey(product,on_delete=models.CASCADE,null=False,default=0)
     order_name=models.CharField(max_length=200,null=False)
     order_price=models.IntegerField()
-    order_img=models.CharField(max_length=200,null=False)
-    numofprod=models.IntegerField(null=False,default=0)
-
+    order_img=models.CharField(max_length=200,null=True,default="")
+    numofprod=models.IntegerField(null=False,default=1)
+    name=models.CharField(max_length=200,null=True,default="")
     def __str__(self):
-        return self.uname
+        return self.order_name
+
+class ordershistory(models.Model):
+    order_sno=models.AutoField(db_column='order_sno', primary_key=True)
+    order_id=models.ForeignKey(product,on_delete=models.CASCADE,null=False,default=0)
+    order_name=models.CharField(max_length=200,null=False)
+    order_price=models.IntegerField()
+    order_img=models.CharField(max_length=200,null=True,default="")
+    numofprod=models.IntegerField(null=False,default=1)
+    name=models.CharField(max_length=200,null=True,default="")
+    def __str__(self):
+        return self.order_name

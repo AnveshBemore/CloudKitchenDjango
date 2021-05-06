@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      #head {
+        background: inherit;
+        position: fixed;
+        z-index: 10;
+      }
+      #cloud {
+        margin: 15px 2px 10px 20px;
+        color: #92c253;
+        font-size: 30px;
+      }
+      #kitchen {
+        margin: 15px 10px 10px 20px;
+        color: #b8b94a;
+        font-size: 30px;
+      }
+      #menu {
+        margin: 15px 10px 10px 600px;
+        color: #4881b1;
+        font-size: 30px;
+      }
+      #orders {
+        margin: 15px 10px 10px 20px;
+        color: #5f90bd;
+        font-size: 30px;
+      }
+      #about {
+        margin: 15px 10px 10px 20px;
+        color: #5f90bd;
+        font-size: 30px;
+      }
+      #search {
+        margin: 15px 10px 10px 20px;
+        height: 25px;
+        width: 200px;
+      }
+
+      #headlinetop {
+        margin-top: 10px;
+      }
+
+      #headlinebottom {
+        margin-bottom: 5px;
+      }
+      ::placeholder {
+        font-size: 20px;
+      }
+      #pdone {
+        display: inline;
+        width: 300px;
+      }
+      #donemsg {
+        display: inline;
+        background-color: green;
+        font-size: 60px;
+        position: relative;
+      }
+      #billprint {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="head">
+      <hr size="1px" width="99%" id="headlinetop" />
+      <span id="cloud kitchen"
+        ><a href="{%url 'index'%}"
+          ><span id="cloud">Cloud</span><span id="kitchen"> Kitchen </span></a
+        ></span
+      >
+      <span id="menu"><a href="{%url 'menu'%}">Menu</a></span>
+      <span id="corders"
+        ><a href="{%url 'displayorders'%}">
+          <span id="orders">Orders</span><span id="countorders">0</span></a
+        ></span
+      >
+      <span id="about">About</span>
+      <input type="text" id="search" placeholder="search" />
+
+      <span id="signin"><a href="{%url 'login'%}" id="sign">signin</a></span>
+      <hr size="1px" width="99%" id="headlinebottom" />
+    </div>
+    <br /><br /><br /><br />
+    <div id="billprint">
+      <div id="pdone">
+        Name :{{name}}<br />
+        Address :{{address}}<br />
+        Phone Number : {{phnnum}}<br />
+        Payment Details :{{payment}}<br />
+      </div>
+      <br /><br /><br /><br />
+      <div id="donemsg">Payment Done</div>
+      <center>
+        <div id="total">
+          No of items:&nbsp;<span id="billnoofitems">0</span><br />
+          Total cost:&nbsp;<span id="totalcost">0</span><br />
+        </div>
+      </center>
+    </div>
+
+    <script>
+      assign();
+      function assign() {
+        document.getElementById(
+          "billnoofitems"
+        ).innerHTML = localStorage.getItem("noofitems");
+        document.getElementById("totalcost").innerHTML = localStorage.getItem(
+          "total"
+        );
+  localStorage.setItem("ordered","0");
+        var co = localStorage.getItem("count");
+        document.getElementById("countorders").innerHTML = co;
+        // document.getElementById("countorders").innerHTML = cou;
+        var x = document.getElementById("sign").innerHTML;
+        if (x !== "signin") {
+          // console.log("xxxxxxxxxxxxxxxxxxxxx");
+          localStorage.setItem("uname", x);
+        }
+        var unam = localStorage.getItem("uname");
+        console.log("unaaaaaaaaaammmmmme " + unam);
+        document.getElementById("sign").innerHTML = unam;
+        console.log(x + " xxxxxxxxxxxxxxxxxxxxxxx");
+
+        localStorage.setItem("total", "0");
+        localStorage.setItem("noofitems", "0");
+        localStorage.setItem("count", "0");
+        
+      }
+    </script>
+  </body>
+</html>

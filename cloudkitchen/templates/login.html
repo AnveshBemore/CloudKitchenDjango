@@ -12,6 +12,7 @@
       <center>
         ` {% csrf_token %}
         <div id="loginbox">
+          <span id="user">{{alreadyuser}}</span><br />
           <span id="mail">Username </span><br />
           <input type="text" name="uname" height="20px" width="175px" /><br />
           <span id="pswd" name="password">Password</span><br />
@@ -26,5 +27,9 @@
         </div>
       </center>
     </form>
+    <script>
+      var un = document.getElementById("uname").innerHTML;
+      console.log(un);
+    </script>
   </body>
 </html>

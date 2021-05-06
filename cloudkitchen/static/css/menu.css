@@ -1,5 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#headlinetop {
+  margin-top: 10px;
+}
+
+#headlinebottom {
+  margin-bottom: 5px;
+}
+#head {
+  background: inherit;
+  position: fixed;
+  z-index: 10;
+}
 #cloud {
-  margin: 15px 2px 10px 20px;
+  margin: 10px 2px 10px 20px;
   color: #92c253;
   font-size: 30px;
 }
@@ -31,12 +47,16 @@
 ::placeholder {
   font-size: 20px;
 }
+#imgbox {
+  padding-top: 92px;
+  padding-top: 92px;
+  z-index: 5;
+  overflow: auto;
+}
 #signin {
   font-size: 25px;
   margin-right: 10px;
   padding: 5px 5px 8px 5px;
-  border: 1px solid;
-  border-radius: 20px;
 }
 body {
   background-color: rgb(212, 211, 204);
@@ -45,7 +65,9 @@ a {
   text-decoration: none;
   color: black;
 }
-
+#nveg {
+  margin-left: 30px;
+}
 .ndishes {
   width: 420px;
   height: 400px;
