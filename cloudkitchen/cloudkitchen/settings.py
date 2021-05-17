@@ -22,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+(_+-(xm5_5s8a)4*@xay6nhaxsubj3j9cw1z4rm)pls$2w2bt'
-
+# SECRET_KEY = '+(_+-(xm5_5s8a)4*@xay6nhaxsubj3j9cw1z4rm)pls$2w2bt'
+SECRET_KEY=os.eviron.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -130,5 +131,4 @@ STATIC_ROOT=os.path.join(BASE_DIR,"staticfiles")
 django_heroku.settings(locals())
 MEDIA_URL='/image/'
 MEDIA_ROOT=os.path.join(BASE_DIR,"image")
-
 
