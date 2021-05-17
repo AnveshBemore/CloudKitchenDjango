@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +27,7 @@ SECRET_KEY = '+(_+-(xm5_5s8a)4*@xay6nhaxsubj3j9cw1z4rm)pls$2w2bt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -124,5 +126,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
+STATIC_ROOT=os.path.join(BASE_DIR,"staticfiles")
+django_heroku.settings(locals())
 MEDIA_URL='/image/'
 MEDIA_ROOT=os.path.join(BASE_DIR,"image")
+heroku config:set DISABLE_COLLECTSTATIC=1
+
